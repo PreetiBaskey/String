@@ -25,7 +25,7 @@ int main() {
 }
 
 
-// 1st approach | using stack
+// 2nd approach | using stack
 // time complexity :- O(N)
 // space complexity :- O(N)
 
@@ -48,6 +48,38 @@ int main() {
         char ele = st.top();
         st.pop();
         cout<<ele;
+    }
+    
+    return 0;
+}
+
+
+// 3rd approach | using recursion
+// time complexity :- O(N)
+// space complexity :- O(N)
+
+#include<iostream>
+using namespace std;
+
+void reverse(string &s, int i, int j) {
+    if(i <= j) {
+        swap(s[i], s[j]);
+        i++; j--;
+        reverse(s, i, j);
+    }
+}
+
+int main() {
+    
+    string s;
+    cout<<"Enter a string :- ";
+    cin>>s;
+    
+    int i = 0, j = s.size() - 1;
+    reverse(s, i, j);
+    cout<<"Reverse of "<<s<<" is :- ";
+    for(char ch: s) {
+        cout<<ch;
     }
     
     return 0;
