@@ -23,3 +23,32 @@ int main() {
     
     return 0;
 }
+
+
+// 1st approach | using stack
+// time complexity :- O(N)
+// space complexity :- O(N)
+
+#include<iostream>
+#include<stack>
+using namespace std;
+
+int main() {
+    
+    string s;
+    cout<<"Enter a string :- ";
+    cin>>s;
+    stack<int> st;
+    
+    for(int i = 0; i < s.size(); i++) {
+        st.push(s[i]);
+    }
+    cout<<"Reverse of "<<s<<" is :- ";
+    while(!st.empty()) {
+        char ele = st.top();
+        st.pop();
+        cout<<ele;
+    }
+    
+    return 0;
+}
