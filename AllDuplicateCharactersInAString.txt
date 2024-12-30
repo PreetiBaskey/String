@@ -1,6 +1,6 @@
 // 1st approach | using unordered_map
 // time complexity :- O(N)
-// space complexity :- O(N)
+// space complexity :- O(k) - where character's size can be max 26
 
 
 #include<iostream>
