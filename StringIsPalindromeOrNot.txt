@@ -1,0 +1,38 @@
+// 1st approach | using 2 pointer
+// time complexity :- O(N)
+// space complexity :- O(1)
+
+
+#include<iostream>
+using namespace std;
+
+bool isPalindrome(string &s) {
+    int i = 0, j = s.size() - 1;
+    while(i <= j) {
+        if(s[i] == s[j]) {
+            i++;
+            j--;
+        }
+        else {
+            return false;
+        }
+    }
+    return true;
+}
+
+int main() {
+    
+    string s;
+    cout<<"Enter a string :- ";
+    cin>>s;
+    
+    bool result = isPalindrome(s);
+    if(result) {
+        cout<<s<<" is palindrome !!";
+    }
+    else {
+        cout<<s<<" is not palindrome !!";
+    }
+    
+    return 0;
+}
