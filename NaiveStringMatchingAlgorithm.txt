@@ -1,0 +1,35 @@
+// Time complexity :- O(N2)
+// Space complexity :- O(1)
+
+#include<iostream>
+using namespace std;
+
+void findPattern(string &txt, string &pat) {
+    int n = txt.size();
+    int m = pat.size();
+    for(int s = 0; s <= n - m; s++) {
+        int p;
+        for(p = 1; p < m; p++) {
+            if(pat[p] != txt[s + p]) {
+                break;
+            }
+        }
+        if(p == m) {
+            cout<<pat<<" is found at index :- "<<s<<endl;
+        }
+    }
+}
+
+int main() {
+    
+    string txt;
+    string pat;
+    cout<<"Enter text :- ";
+    cin>>txt;
+    cout<<"Enter pattern :- ";
+    cin>>pat;
+    
+    findPattern(txt, pat);
+    
+    return 0;
+}
