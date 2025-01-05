@@ -1,3 +1,7 @@
+// 1st approach | using recursion
+// Time complexity :- O()
+// Space complexity :- O()
+
 #include<iostream>
 using namespace std;
 
@@ -25,6 +29,53 @@ int main() {
     cin>>s;
     int LCS;
     LCS = getLCS(s, s, 0, 0);
+    cout<<"Longest common subsequence is :- "<<LCS;
+    
+    return 0;
+}
+
+
+
+
+// 2nd approach | using recursion + memoization
+// Time complexity :- O(N2)
+// Space complexity :- O(N2)
+
+#include<iostream>
+#include<vector>
+using namespace std;
+
+int getLCS(string s1, string s2, int i, int j, vector<vector<int>> &dp) {
+    int m = s1.size();
+    int n = s2.size();
+    
+    if(i == m || j == n) {
+        return 0;
+    }
+    
+    if(dp[i][j] != -1) {
+        return dp[i][j];
+    }
+    
+    if(s1[i] == s2[j] && i != j) {
+        return dp[i][j] = 1 + getLCS(s1, s2, i + 1, j + 1, dp);
+    }
+    else {
+        int c1 = getLCS(s1, s2, i, j + 1, dp);
+        int c2 = getLCS(s1, s2, i + 1, j, dp);
+        return dp[i][j] = max(c1, c2);
+    }
+}
+
+int main() {
+    
+    string s1, s2;
+    cout<<"Enter a string :- ";
+    cin>>s1;
+    s2 = s1;
+    vector<vector<int>> dp(s1.size(), vector<int>(s1.size(), -1));
+    int LCS;
+    LCS = getLCS(s1, s2, 0, 0, dp);
     cout<<"Longest common subsequence is :- "<<LCS;
     
     return 0;
