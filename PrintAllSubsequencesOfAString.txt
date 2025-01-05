@@ -1,0 +1,36 @@
+// 1st approach | using recusion
+// Time complexity :- 
+// Space complexity :- 
+
+#include<iostream>
+#include<vector>
+using namespace std;
+
+int findAllSubsequences(string s, vector<string> &seqs) {
+    if(s.length() == 0) {
+        seqs.push_back("");
+        return 1;
+    }
+    int smallerSize = findAllSubsequences(s.substr(1), seqs);
+    for(int i = 0; i < smallerSize; i++) {
+        seqs.push_back(s[0] + seqs[i]);
+    }
+    
+    return 2 * smallerSize;
+}
+
+int main() {
+    
+    string s;
+    cout<<"Enter a string :- ";
+    cin>>s;
+    vector<string> seqs;
+    int len;
+    len = findAllSubsequences(s, seqs);
+    cout<<"Length of the subsequence "<<s<<" is :- "<<len<<endl;
+    for(string &s: seqs) {
+        cout<<s<<endl;
+    }
+    
+    return 0;
+}
