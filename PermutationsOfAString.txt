@@ -1,0 +1,43 @@
+// 1st approach | using recursion + unordered_set
+// Time complexity :- O(N*N!)
+// Space complexity :- O(N*N!)
+
+#include<iostream>
+#include<vector>
+#include<unordered_set>
+using namespace std;
+
+void permute(string input, string output, vector<string> &result) {
+    if(input.size() == 0) {
+        result.push_back(output);
+        return;
+    }
+    unordered_set<char> st;
+    for(int i = 0; i < input.size(); i++) {
+        if(st.find(input[i]) == st.end()) {
+            st.insert(input[i]);
+            string newInput = input.substr(0, i) + input.substr(i + 1);
+            string newOutput = output + input[i];
+            permute(newInput, newOutput, result);
+        }
+    }
+}
+
+void findPermutation(string s, vector<string> &result) {
+    permute(s, "", result);
+}
+ 
+int main() {
+    
+    string s;
+    cout<<"Enter a string :- ";
+    cin>>s;
+    vector<string> result;
+    findPermutation(s, result);
+    cout<<"Permutations of a string "<<s<<" is :- "<<endl;
+    for(string &p: result) {
+        cout<<p<<endl;
+    }
+    
+    return 0;
+}
