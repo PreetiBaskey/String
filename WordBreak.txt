@@ -56,3 +56,71 @@ int main() {
     
     return 0;
 }
+
+
+
+
+// 1st approach | using recursion + memoization | dp
+// Time complexity :- O(n^2)
+// Space complexity :- O(n)
+
+
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include<unordered_set>
+#include<cstring>
+using namespace std;
+
+unordered_set<string> st;
+int dp[101];
+
+bool solve(int idx, string &s) {
+    int n = s.size();
+    if(idx == n) {
+        return true;
+    }
+    if(dp[idx] != -1) {
+        return dp[idx];
+    }
+    if(st.find(s) != st.end()) {
+        return dp[idx] = true;
+    }
+    for(int l = 1; l <= n; l++) {
+        string temp = s.substr(idx, l);
+        if(st.find(temp) != st.end() && solve(idx + l, s)) {
+            return dp[idx] = true;
+        }
+    }
+    return dp[idx] = false;
+}
+
+int main() {
+    
+    int n;
+    string s;
+    cout<<"Enter the size of the dictionary :- ";
+    cin>>n;
+    vector<string> dictionary(n);
+    memset(dp, -1, sizeof(dp));
+    cout<<"Enter the dictionary strings."<<endl;
+    for(int i = 0; i < n; i++) {
+        cout<<"Enter "<<i<<" th string :- ";
+        cin>>dictionary[i];
+    }
+    for(string &word: dictionary) {
+        st.insert(word);
+    }
+    cout<<"Enter a string, on which you want to check on :- ";
+    cin>>s;
+    
+    bool result = solve(0, s);
+    if(result) {
+        cout<<s<<" is found !!";
+    }
+    else {
+        cout<<s<<" is not found !!";
+    }
+    
+    return 0;
+}
